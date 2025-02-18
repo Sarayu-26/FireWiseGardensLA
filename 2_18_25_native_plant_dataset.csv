@@ -1,0 +1,47 @@
+plant_type,plant_species,local,sun,water,height_width,color,pollinator_interactions
+trees,Blue Elderberry / Sambucus nigra,Y,full sun,Medium,15'+ / 15'+,white,All
+trees,Rainbow Manzanita / Arctostaphylos rainbowensis,N,full sun,Very Low,18' / 12'+,red,All
+trees,Laurel Sumac / Malosma laurina,Y,full sun,Very Low,15' / 15',green,All
+trees,Island Ironwood / Lyonothamnus floribundus,Y,full sun,Very Low,20' / 15',green,All
+large shrub,Lemonadeberry / Rhus integrifolia,Y,full sun,Very Low,6'-10' / 8',Pink,Birds; Bees
+large shrub,Toyon / Heteromeles arbutifolia,Y,full sun,Very Low,12' / 12',Red,All
+large shrub,Coyote Bush / Baccharis pilularis,N,full sun,Very Low,6'-8' / 6',Green,Birds; Bees
+large shrub,Bladderpod / Peritoma arborea,N,full sun,Very Low,6' / 6',Yellow,Birds
+large shrub,Frosty Blue California Lilac / Ceanothus 'Frosty Blue',N,full sun,Low,6-10' / 8',Blue,All
+medium shrub,Purple Sage / Salvia leucophylla,Y,full sun,Very Low,4'-5' / 5'-6',Purple,Birds; Bees
+medium shrub,Black Sage / Salvia mellifera,Y,full sun,Very Low,4'-5' / 4'-5',Purple,Birds; Bees
+medium shrub,California Buckwheat / Eriogonum fasciculatum,Y,full sun,Very Low,3' / 4'-6',White,All
+medium shrub,Ashyleaf Buckwheat / Eriogonum cinereum,Y,full sun,Very Low,3' / 5'-6',White,All
+medium shrub,California Sagebrush / Artemisia californica,Y,full sun,Very Low,4' / 4'-5',Green,Birds
+medium shrub,Howard McMinn Manzanita / Arctostaphylos 'Howard McMinn',N,full sun,Very Low,6' / 6',Pink,All
+medium shrub,Bush Sunflower / Encelia californica,Y,full sun,Very Low,3' / 6',Yellow,All
+small shrub,Coastal Buckwheat / Eriogonum parvifolium,Y,full sun,Very Low,3' / 3',White,All
+small shrub,Deer Weed / Acmispon glaber,Y,full sun,Very Low,3' / 3',Yellow,Bees; Butterflies
+small shrub,Sticky Monkeyflower / Mimulus aurantiacus,Y,full sun,Low,3' / 3',Orange,Birds
+small shrub,Silver Lace / Constancea nevinii,N,full sun,Low,3' / 3',Silver,All
+small shrub,Conejo Buckwheat / Eriogonum crocatum,N,full sun,Low,3' / 3',Yellow,All
+small shrub,Island Snapdragon / Gambelia 'Firecracker',N,full sun,Low,3' / 3',Red,Birds
+small shrub,White Sage / Salvia apiana,Y,full sun,Low,3' / 3',White,Birds; Bees
+small shrub,Lilac Verbena / Verbena lilacina,Y,full sun,Low,3' / 3',Purple,Bees; Butterflies
+low shrub,Rattlepod / Astragalus trichopodus,Y,full sun,Very Low,2' / 2',Yellow,Bees; Butterflies
+low shrub,Horkelia / Horkelia cuneata,N,full sun,Low,1' / 2',White,Bees; Butterflies
+low shrub,Blue-Eyed Grass / Sisyrinchium bellum,Y,full sun,Medium,1' / 1',Blue,All
+low shrub,Island Coral Bells / Heuchera maxima,Y,full sun,Medium,1' / 2',Pink,Birds
+low shrub,Seaside Daisy / Erigeron glaucus,Y,full sun,Medium,1' / 3',Purple,Bees; Butterflies
+low shrub,Four-O'-Clock / Mirabilis californica,N,full sun,Very Low,1' / 10',Yellow,Bees; Butterflies
+low shrub,Narrowleaf Milkweed / Asclepias fascicularis,N,full sun,Very Low,1'-3' / 1',Red,Butterflies
+spreading groundcover,California Fuchsia / Epilobium canum,Y,full sun,Very Low,2' / 3',Purple,Birds
+spreading groundcover,Silver Carpet Aster / Lessingia 'Silver Carpet',N,full sun,Low,3' / 6',White,Bees; Butterflies
+spreading groundcover,Yarrow / Achillea millefolium,N,full sun,Low,1' / 1',Blue,All
+spreading groundcover,Anchor Bay Ceanothus / Ceanothus 'Anchor Bay',N,full sun,Low,3' / 5'+,Green,All
+grasses,Deer Grass / Muhlenbergia rigens,Y,full sun,Low,33',Green,Birds
+grasses,Purple Needlegrass / Stipa pulchra,Y,full sun,Very Low,10',Green,All
+grasses,Melic Grass / Melica imperfecta,Y,full sun,Very Low,13',Green,Bird
+grasses,Canyon Prince Rye Grass / Leymus 'Canyon Prince',Y,full sun,Low,17',Blue,None
+succulents,Bright Green Dudleya / Dudleya virens,Y,full sun,Very Low,10'+,Green,Birds
+succulents,Prickly-Pear Cactus / Opuntia littoralis,Y,full sun,Very Low,15'+,Green,Birds; Bees
+succulents,Lance Leaf Live-Forever / Dudleya lanceolata,Y,full sun,Very Low,10'+,Green,Birds
+succulents,Shaw's Agave / Agave shawii,N,full sun,Very Low,20',Green,Birds
+vines,Morning Glory / Calystegia macrostegia,N,full sun,Very Low,8',White,All
+vines,Virgin's Bower / Clematis ligusticifolia,N,full sun,Low,5',Red,All
+vines,Climbing Penstemon / Kackiella cordifolia,Y,full sun,Very Low,10'+,Red,None
