@@ -5,18 +5,14 @@ library(dplyr)
 library(tidygeocoder)
 library(leaflet)# For data manipulation
 
-# Create a data frame with the name of the nursery
+# Create a data frame with the names of the nurseries
 nurseries <- data.frame(name = c("Theodore Payne Nursery, Los Angeles", 
-                                 "Hahamongna Native Plant Nursery,Los Angeles", 
-                                 "Artemisia Nursery, Los Angeles",
-))
+                                 "Hahamongna Native Plant Nursery, Los Angeles", 
+                                 "Artemisia Nursery, Los Angeles"))
 
 # Geocode the address using OpenStreetMap (OSM) API
-nurseries <- geocode(nurseries, address = name, method = "osm")
+nurseries <- geocode(nurseries, address = "name", method = "osm")
 
 # View the result with latitude and longitude
 print(nurseries)
-
-
-nurseries <- data.frame(name = "native plant nursery Los Angeles")
-nurseries <- geocode(nurseries, address = name, method = "osm")  # Uses OpenStreetMap API
+  # Uses OpenStreetMap API
