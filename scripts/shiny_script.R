@@ -97,7 +97,7 @@ server <- function(input, output) {
     
     # Filter by nursery availability
     if (input$nursery_availability) {
-      # Not sure how we may be able to map out nursery availability?
+      
     }
     
     return(data)
