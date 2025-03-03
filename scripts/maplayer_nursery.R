@@ -16,3 +16,9 @@ nurseries <- geocode(nurseries, address = "name", method = "osm")
 # View the result with latitude and longitude
 print(nurseries)
   # Uses OpenStreetMap API
+nursery_map <- leaflet(nurseries) %>%
+  addTiles() %>%  # Add default OpenStreetMap tiles
+  addMarkers(lng = ~long, lat = ~lat, popup = ~name)  # Add markers with popups
+
+# Print the map
+nursery_map
