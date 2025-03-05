@@ -4,8 +4,10 @@ library(tigris) # For county boundaries
 library(dplyr)
 library(tidygeocoder)
 library(leaflet)
+library(here)
 
 # Create a data frame with the names of the nurseries
+#Nurseries and Inventory taken from https://calscape.org/california-nurseries
 nurseries <- data.frame(name = c("Theodore Payne Nursery, Los Angeles", 
                                  "Hahamongna Native Plant Nursery, Los Angeles", 
                                  "Artemisia Nursery, Los Angeles", 
@@ -13,7 +15,8 @@ nurseries <- data.frame(name = c("Theodore Payne Nursery, Los Angeles",
                                  "Plant Material, Los Angeles",
                                  "Lincoln Avenue Nursery, Pasadena",
                                  "El Nativo Growers, Azusa",
-                                 "Bellefontaine Nursery, Pasadena"))
+                                 "Bellefontaine Nursery, Pasadena"
+                                 ))
 
 # Geocode the address using OpenStreetMap (OSM) API
 nurseries <- nurseries|>
@@ -23,14 +26,14 @@ nurseries <- nurseries %>%
   mutate(
     lat = ifelse(is.na(lat), case_when(
       name == "Matilija Nursery, Moorpark" ~ 34.3184,
-      name == "Plant Material, Los Angeles" ~ 34.0985,
-      name == "Lincoln Avenue Nursery, Pasadena" ~ 34.1651,
+      name == "Plant Material, Los Angeles" ~ 34.11452, 
+      name == "Lincoln Avenue Nursery, Pasadena" ~ 34.1691,
       name == "El Nativo Growers, Azusa" ~ 34.1309,
       TRUE ~ NA_real_  # Keeps other NAs unchanged
     ), lat),
     long = ifelse(is.na(long), case_when(
       name == "Matilija Nursery, Moorpark" ~ -118.8811,
-      name == "Plant Material, Los Angeles" ~ -118.2350,
+      name == "Plant Material, Los Angeles" ~ -118.23620, 
       name == "Lincoln Avenue Nursery, Pasadena" ~ -118.1356,
       name == "El Nativo Growers, Azusa" ~ -117.9115,
       TRUE ~ NA_real_
@@ -44,4 +47,5 @@ leaflet(nurseries)|>
   addProviderTiles(providers$OpenStreetMap) %>%  # Add default OpenStreetMap tiles
   addMarkers(lng = ~long, lat = ~lat, popup = ~name)  # Add markers with popups
 
+#samplecode for inputting into shiny app 
 

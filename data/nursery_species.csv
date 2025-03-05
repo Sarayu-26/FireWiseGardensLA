@@ -1,0 +1,68 @@
+species_id,species_name,nursery_id
+1,california_cudweed,1
+1,california_cudweed,3
+2,california_poppy,7
+2,california_poppy,1
+2,california_poppy,5
+2,california_poppy,3
+3,coast_dudleya,3
+3,coast_dudleya,5
+3,coast_dudleya,1
+4,foothill_penstemon,1
+4,foothill_penstemon,3
+5,common_yarrow,1
+5,common_yarrow,3
+5,common_yarrow,5
+6,ca_buckwheat,1
+6,ca_buckwheat,5
+6,ca_buckwheat,7
+6,ca_buckwheat,3
+7,ca_sagebrush ,3
+7,ca_sagebrush ,1
+7,ca_sagebrush ,5
+7,ca_sagebrush ,7
+8,coyote_brush,1
+8,coyote_brush,3
+8,coyote_brush,7
+9,coastal_cholla,5
+9,coastal_cholla,3
+9,coastal_cholla,7
+10,bladderpod ,5
+10,bladderpod ,3
+10,bladderpod ,7
+11,bush_monkeyflower,7
+11,bush_monkeyflower,3
+12,ca_fuschia,5
+12,ca_fuschia,3
+12,ca_fuschia,7
+13,chaparral_yucca,1
+13,chaparral_yucca,5
+13,chaparral_yucca,7
+13,chaparral_yucca,3
+13,chaparral_yucca,4
+14,toyon,4
+14,toyon,1
+14,toyon,7
+14,toyon,3
+15,laurel_sumac ,1
+15,laurel_sumac ,5
+15,laurel_sumac ,7
+15,laurel_sumac ,3
+15,laurel_sumac ,6
+16,deergrass,4
+16,deergrass,3
+16,deergrass,1
+16,deergrass,7
+17,coast_live_oak,4
+17,coast_live_oak,5
+17,coast_live_oak,7
+17,coast_live_oak,3
+18,lemonade_berry,4
+18,lemonade_berry,1
+18,lemonade_berry,3
+18,lemonade_berry,7
+19,matilija_poppy,1
+19,matilija_poppy,7
+19,matilija_poppy,3
+20,salvia_sage,4
+20,salvia_sage,7
