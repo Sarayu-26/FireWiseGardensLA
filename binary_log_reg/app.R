@@ -25,6 +25,9 @@ library(shinyWidgets)
 library(janitor)
 library(caret)
 library(DT)
+library(plantr)
+
+
 
 # Simulated dataset
 generate_data <- function(n = 200) {
