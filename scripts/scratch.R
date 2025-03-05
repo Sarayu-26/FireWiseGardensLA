@@ -19,39 +19,53 @@ library(sp)
 library(rvest)
 library(dplyr)
 library(stringr)
+library(purrr)
+library(here)
 
 #generate plant characteristic dataset
 oak_ex <- ptr_search(common_name = "white sagebrush", county = "Los Angeles", native = TRUE)
 
 #not working, looks like plantr is outdated
 
+#extract symbol names into a dataframe
+ca_plant_search <- read.csv(here("data", "ca_plant_search.csv"))
+
+#make me a code that reads html from this html, read the code from the structure of the site
+#look for specific characteristics within the 
+
+#create function for a loop or purr that adds by the symbol
+
+
 #rvest scraping script
 
 # Function to scrape plant characteristics from USDA PLANTS Database
 scrape_plant_data <- function(plant_symbol) {
-  base_url <- "https://plants.usda.gov/home/plantProfile?symbol="
-  plant_url <- paste0(base_url, plant_symbol)
+  base_url <- "https://plants.usda.gov/plant-profile/"
+  end_url <- "/characteristics.html"
+  plant_url <- paste0(base_url, plant_symbol, end_url)
   
   # Try fetching the webpage
-  page <- tryCatch({
-    read_html(plant_url)
-  }, error = function(e) {
-    message(paste("Error fetching data for:", plant_symbol))
-    return(NULL)
-  })
+  # page <- tryCatch({
+  #   read_html(plant_url)
+  # }, error = function(e) {
+  #   message(paste("Error fetching data for:", plant_symbol))
+  #   return(NULL)
+  # })
+  # 
+  # # If page couldn't be loaded, return NA for all characteristics
+  # if (is.null(page)) {
+  #   return(data.frame(
+  #     Plant_Symbol = plant_symbol,
+  #     Growth_Period = NA, Moisture_Use = NA, Drought_Tolerance = NA, 
+  #     Root_Depth = NA, Planting_Density = NA, Height = NA, Fire_Resistance = NA,
+  #     stringsAsFactors = FALSE
+  #   ))
+  # }
   
-  # If page couldn't be loaded, return NA for all characteristics
-  if (is.null(page)) {
-    return(data.frame(
-      Plant_Symbol = plant_symbol,
-      Growth_Period = NA, Moisture_Use = NA, Drought_Tolerance = NA, 
-      Root_Depth = NA, Planting_Density = NA, Height = NA, Fire_Resistance = NA,
-      stringsAsFactors = FALSE
-    ))
-  }
+  
   
   # Extract table data
-  table_nodes <- page %>% html_nodes("table") 
+  table_nodes <- read_html(plant_url) %>% html_nodes("div#characteristics") 
   if (length(table_nodes) == 0) {
     message(paste("No table found for:", plant_symbol))
     return(NULL)
@@ -81,6 +95,8 @@ scrape_plant_data <- function(plant_symbol) {
     stringsAsFactors = FALSE
   )
 }
+
+
 
 # Example list of plant symbols to scrape
 plant_symbols <- c("ARLU")  # Replace with your plant symbols
