@@ -8,7 +8,9 @@ library(here)
 
 # Create a data frame with the names of the nurseries
 #Nurseries and Inventory taken from https://calscape.org/california-nurseries
-nurseries <- data.frame(name = c("Theodore Payne Nursery, Los Angeles", 
+nurseries <- data.frame(
+nursery_id = 1:8,
+name = c("Theodore Payne Nursery, Los Angeles", 
                                  "Hahamongna Native Plant Nursery, Los Angeles", 
                                  "Artemisia Nursery, Los Angeles", 
                                  "Matilija Nursery, Moorpark",
@@ -48,4 +50,11 @@ leaflet(nurseries)|>
   addMarkers(lng = ~long, lat = ~lat, popup = ~name)  # Add markers with popups
 
 #samplecode for inputting into shiny app 
+#see sarayu_scratch_script.R
+
+#add nursery id for each nursery
+nursery_species <- read.csv(here("data", "nursery_species.csv"))
+species_by_nurseries <- left_join(nursery_species, nurseries, by = "nursery_id")
+write.csv(species_by_nurseries, here("data", "species_by_nursery.csv"))
+
 
