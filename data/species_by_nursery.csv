@@ -1,68 +1,134 @@
-"","species_id","species_name","nursery_id","name","lat","long"
-"1",1,"california_cudweed",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"2",1,"california_cudweed",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"3",2,"california_poppy",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"4",2,"california_poppy",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"5",2,"california_poppy",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"6",2,"california_poppy",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"7",3,"coast_dudleya",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"8",3,"coast_dudleya",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"9",3,"coast_dudleya",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"10",4,"foothill_penstemon",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"11",4,"foothill_penstemon",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"12",5,"common_yarrow",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"13",5,"common_yarrow",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"14",5,"common_yarrow",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"15",6,"ca_buckwheat",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"16",6,"ca_buckwheat",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"17",6,"ca_buckwheat",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"18",6,"ca_buckwheat",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"19",7,"ca_sagebrush ",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"20",7,"ca_sagebrush ",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"21",7,"ca_sagebrush ",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"22",7,"ca_sagebrush ",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"23",8,"coyote_brush",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"24",8,"coyote_brush",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"25",8,"coyote_brush",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"26",9,"coastal_cholla",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"27",9,"coastal_cholla",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"28",9,"coastal_cholla",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"29",10,"bladderpod ",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"30",10,"bladderpod ",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"31",10,"bladderpod ",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"32",11,"bush_monkeyflower",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"33",11,"bush_monkeyflower",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"34",12,"ca_fuschia",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"35",12,"ca_fuschia",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"36",12,"ca_fuschia",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"37",13,"chaparral_yucca",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"38",13,"chaparral_yucca",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"39",13,"chaparral_yucca",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"40",13,"chaparral_yucca",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"41",13,"chaparral_yucca",4,"Matilija Nursery, Moorpark",34.3184,-118.8811
-"42",14,"toyon",4,"Matilija Nursery, Moorpark",34.3184,-118.8811
-"43",14,"toyon",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"44",14,"toyon",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"45",14,"toyon",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"46",15,"laurel_sumac ",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"47",15,"laurel_sumac ",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"48",15,"laurel_sumac ",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"49",15,"laurel_sumac ",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"50",15,"laurel_sumac ",6,"Lincoln Avenue Nursery, Pasadena",34.1691,-118.1356
-"51",16,"deergrass",4,"Matilija Nursery, Moorpark",34.3184,-118.8811
-"52",16,"deergrass",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"53",16,"deergrass",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"54",16,"deergrass",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"55",17,"coast_live_oak",4,"Matilija Nursery, Moorpark",34.3184,-118.8811
-"56",17,"coast_live_oak",5,"Plant Material, Los Angeles",34.11452,-118.2362
-"57",17,"coast_live_oak",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"58",17,"coast_live_oak",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"59",18,"lemonade_berry",4,"Matilija Nursery, Moorpark",34.3184,-118.8811
-"60",18,"lemonade_berry",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"61",18,"lemonade_berry",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"62",18,"lemonade_berry",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"63",19,"matilija_poppy",1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"64",19,"matilija_poppy",7,"El Nativo Growers, Azusa",34.1309,-117.9115
-"65",19,"matilija_poppy",3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"66",20,"salvia_sage",4,"Matilija Nursery, Moorpark",34.3184,-118.8811
-"67",20,"salvia_sage",7,"El Nativo Growers, Azusa",34.1309,-117.9115
+species_id,common_name,species_name,nursery_id,name,lat,long,website 
+1,California Cudweed,california_cudweed,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+1,California Cudweed,california_cudweed,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+2,California Poppy,california_poppy,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+2,California Poppy,california_poppy,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+2,California Poppy,california_poppy,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+2,California Poppy,california_poppy,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+3,Coast Dudleya,coast_dudleya,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+3,Coast Dudleya,coast_dudleya,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+3,Coast Dudleya,coast_dudleya,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+4,Foothill Penstemon,foothill_penstemon,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+4,Foothill Penstemon,foothill_penstemon,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+5,Common Yarrow,common_yarrow,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+5,Common Yarrow,common_yarrow,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+5,Common Yarrow,common_yarrow,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+6,California Buckwheat,ca_buckwheat,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+6,California Buckwheat,ca_buckwheat,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+6,California Buckwheat,ca_buckwheat,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+6,California Buckwheat,ca_buckwheat,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+7,California Sagebrush,ca_sagebrush ,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+7,California Sagebrush,ca_sagebrush ,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+7,California Sagebrush,ca_sagebrush ,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+7,California Sagebrush,ca_sagebrush ,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+8,Coyote Brush,coyote_brush,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+8,Coyote Brush,coyote_brush,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+8,Coyote Brush,coyote_brush,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+9,Coastal Cholla,coastal_cholla,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+9,Coastal Cholla,coastal_cholla,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+9,Coastal Cholla,coastal_cholla,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+10,Bladderpod,bladderpod ,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+10,Bladderpod,bladderpod ,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+10,Bladderpod,bladderpod ,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+11,Scarlet Monkeyflower,scarlet_monkeyflower,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+11,Scarlet Monkeyflower,scarlet_monkeyflower,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+12,Calfornia Fuschia,ca_fuschia,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+12,Calfornia Fuschia,ca_fuschia,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+12,Calfornia Fuschia,ca_fuschia,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+13,Chaparral Yucca,chaparral_yucca,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+13,Chaparral Yucca,chaparral_yucca,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+13,Chaparral Yucca,chaparral_yucca,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+13,Chaparral Yucca,chaparral_yucca,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+13,Chaparral Yucca,chaparral_yucca,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+14,Toyon,toyon,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+14,Toyon,toyon,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+14,Toyon,toyon,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+14,Toyon,toyon,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+15,Laurel Sumac ,laurel_sumac ,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+15,Laurel Sumac ,laurel_sumac ,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+15,Laurel Sumac ,laurel_sumac ,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+15,Laurel Sumac ,laurel_sumac ,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+15,Laurel Sumac ,laurel_sumac ,6,"Lincoln Avenue Nursery, Pasadena",34.1691,-118.1356,https://lincolnavenuenursery.com/
+16,Deergrass,deergrass,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+16,Deergrass,deergrass,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+16,Deergrass,deergrass,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+16,Deergrass,deergrass,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+17,Coast Live Oak,coast_live_oak,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+17,Coast Live Oak,coast_live_oak,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+17,Coast Live Oak,coast_live_oak,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+17,Coast Live Oak,coast_live_oak,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+18,Lemonade Berry,lemonade_berry,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+18,Lemonade Berry,lemonade_berry,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+18,Lemonade Berry,lemonade_berry,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+18,Lemonade Berry,lemonade_berry,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+19,Matilija Poppy,matilija_poppy,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+19,Matilija Poppy,matilija_poppy,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+19,Matilija Poppy,matilija_poppy,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+20,Salvia Sage,salvia_sage,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+20,Salvia Sage,salvia_sage,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+21,California Buckeye,california_buckeye,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+21,California Buckeye,california_buckeye,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+22,Desert Agave,desert_agave,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+22,Desert Agave,desert_agave,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+22,Desert Agave,desert_agave,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+23,Yerba Mansa,yerba_mansa,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+23,Yerba Mansa,yerba_mansa,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+23,Yerba Mansa,yerba_mansa,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+23,Yerba Mansa,yerba_mansa,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+24,California Laurel,ca_laurel,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+24,California Laurel,ca_laurel,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+24,California Laurel,ca_laurel,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+25,California Wildrose,ca_wildrose,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+25,California Wildrose,ca_wildrose,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+25,California Wildrose,ca_wildrose,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+25,California Wildrose,ca_wildrose,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+26,Bigberry Manzanita,bigberry_manzanita,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+26,Bigberry Manzanita,bigberry_manzanita,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+26,Bigberry Manzanita,bigberry_manzanita,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+27,White Sagebrush,white_sagebrush,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+28,Basin Big Sage Brush,basin_big_sage__brush,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+29,Saltgrass,saltgrass,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+30,Flannel Bush,flannel_bush,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+31,Black Cottonwood,black_cottonwood,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+32,Canyon Live Oak,canyon_live_oak,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+32,Canyon Live Oak,canyon_live_oak,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+32,Canyon Live Oak,canyon_live_oak,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+33,California Black Oak,ca_black_oak,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+34,California Blackberry,ca_blackberry,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+34,California Blackberry,ca_blackberry,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+34,California Blackberry,ca_blackberry,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+34,California Blackberry,ca_blackberry,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+35,Sugar Sumac,sugar_sumac,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+35,Sugar Sumac,sugar_sumac,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+36,Sierra Currant,sierra_currant,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+37,Purple Sage,purple_sage,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+37,Purple Sage,purple_sage,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+37,Purple Sage,purple_sage,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+38,Desert Globemallow,desert_globemallow,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+38,Desert Globemallow,desert_globemallow,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+38,Desert Globemallow,desert_globemallow,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+38,Desert Globemallow,desert_globemallow,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+39,Gooddings Willow,gooddings_willow,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+40,Broadleaf Cattail,broadleaf_cattail,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+41,Skunkbush Sumac,skunkbush_sumac,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+42,Redberry Buckthorn,redberry_buckthorn,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+42,Redberry Buckthorn,redberry_buckthorn,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+43,California Wax Myrtle,ca_wax_myrtle,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+43,California Wax Myrtle,ca_wax_myrtle,7,"El Nativo Growers, Azusa",34.1309,-117.9115,https://elnativogrowers.com/
+44,California Sycamore,ca_sycamore,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+44,California Sycamore,ca_sycamore,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+44,California Sycamore,ca_sycamore,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+44,California Sycamore,ca_sycamore,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+45,Common Lipia,common_lipia,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+45,Common Lipia,common_lipia,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+45,Common Lipia,common_lipia,3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616,https://artemisianursery.com/
+46,Hollyleaf Cherry,hollyleaf_cherry,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+46,Hollyleaf Cherry,hollyleaf_cherry,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+47,Bigleaf Maple,bigleaf_maple,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+48,White Alder,white_alder,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.2362,https://theodorepayne.org/plants-and-seeds/nursery/
+48,White Alder,white_alder,5,"Plant Material, Los Angeles",34.11452,-118.3593541,https://plant-material.com/
+49,False Indigo Bush,false_indigo_bush,4,"Matilija Nursery, Moorpark",34.3184,-118.8811,https://www.matilijanursery.com/
+49,False Indigo Bush,false_indigo_bush,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+49,False Indigo Bush,false_indigo_bush,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/
+50,Pacific Madrone,pacific_madrone,5,"Plant Material, Los Angeles",34.11452,-118.2362,https://plant-material.com/
+50,Pacific Madrone,pacific_madrone,1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.3593541,https://theodorepayne.org/plants-and-seeds/nursery/

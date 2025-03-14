@@ -3,7 +3,9 @@ library(shiny)
 library(leaflet)
 library(dplyr)
 library(here)
+library(stringr)
 
+# Load species_by_nursery dataset
 species_by_nursery <- read.csv(here("data", "species_by_nursery.csv"))
 
 # Define UI
@@ -17,7 +19,7 @@ ui <- fluidPage(
              leafletOutput("nursery_map")
     ),
     
-    # Tab 2: Filter by Plant Species
+    # Tab 2: Filter by Plant Species (Using common_name)
     tabPanel("Select by Plant Species",
              selectInput("species_select", "Choose a Plant Species:", choices = NULL),
              leafletOutput("species_map")
@@ -28,34 +30,37 @@ ui <- fluidPage(
 # Define Server Logic
 server <- function(input, output, session) {
   
-  # Populate dropdown for nursery selection based on species_by_nursery data
+  # Populate dropdown for nursery selection
   observe({
     updateSelectInput(session, "nursery_select", 
                       choices = c("All Nurseries", unique(species_by_nursery$name)), 
                       selected = "All Nurseries")
   })
   
-  # Populate dropdown for species selection based on species_by_nursery data
+  # Populate dropdown for species selection (Now using `common_name`)
   observe({
     updateSelectInput(session, "species_select", 
-                      choices = unique(species_by_nursery$species_name), 
-                      selected = unique(species_by_nursery$species_name)[1])
+                      choices = unique(species_by_nursery$common_name), 
+                      selected = unique(species_by_nursery$common_name)[1])
   })
   
-  # Reactive: Filter nurseries by selected nursery (handles "All Nurseries")
+  # Reactive: Filter nurseries by selected nursery
   filtered_nursery <- reactive({
     if (input$nursery_select == "All Nurseries") {
-      # Return all nurseries if "All Nurseries" is selected
-      return(species_by_nursery)
+      return(species_by_nursery %>%
+               group_by(name) %>%
+               summarize(lat = mean(lat), long = mean(long), .groups = "drop"))  # Ensures unique nurseries
     } else {
-      # Filter by the selected nursery
-      return(species_by_nursery %>% filter(name == input$nursery_select))
+      return(species_by_nursery %>%
+               filter(name == input$nursery_select) %>%
+               group_by(name) %>%
+               summarize(lat = mean(lat), long = mean(long), .groups = "drop"))  # Unique nursery
     }
   })
   
-  # Reactive: Filter species by selected plant species
+  # Reactive: Filter species by selected plant species (Using `common_name`)
   filtered_species <- reactive({
-    species_by_nursery %>% filter(species_name == input$species_select)
+    species_by_nursery %>% filter(common_name == input$species_select)
   })
   
   # Render map for selected nursery
@@ -71,8 +76,9 @@ server <- function(input, output, session) {
     
     leafletProxy("nursery_map") %>%
       clearMarkers() %>%
+      clearShapes() %>%
       addMarkers(data = selected_nursery, 
-                 lng = ~long, lat = ~lat, popup = ~paste(name, "<br>Plant:", species_name))
+                 lng = ~long, lat = ~lat, popup = ~name)
   })
   
   # Render map for selected plant species
@@ -86,14 +92,15 @@ server <- function(input, output, session) {
   observe({
     selected_species <- filtered_species()
     
-    # Get the corresponding nurseries for the selected plant species
-    selected_nurseries <- species_by_nursery %>% 
-      filter(species_name == input$species_select)
-    
-    leafletProxy("species_map") %>%
-      clearMarkers() %>%
-      addMarkers(data = selected_nurseries, 
-                 lng = ~long, lat = ~lat, popup = ~paste(name, "<br>Plant:", species_name))
+    if (nrow(selected_species) > 0) {
+      leafletProxy("species_map") %>%
+        clearMarkers() %>%
+        addMarkers(data = selected_species, 
+                   lng = ~long, lat = ~lat, popup = ~paste(name, "<br>Plant:", common_name))
+    } else {
+      leafletProxy("species_map") %>%
+        clearMarkers()
+    }
   })
 }
 

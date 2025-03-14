@@ -56,5 +56,5 @@ leaflet(nurseries)|>
 nursery_species <- read.csv(here("data", "nursery_species.csv"))
 species_by_nurseries <- left_join(nursery_species, nurseries, by = "nursery_id")
 write.csv(species_by_nurseries, here("data", "species_by_nursery.csv"))
-
+#ladiada
 
