@@ -26,6 +26,8 @@ library(dplyr)
 library(here)
 library(stringr)
 library(htmltools)
+
+
 # Load species_by_nursery dataset
 species_by_nursery <- read.csv(here("data", "species_by_nursery.csv"))
 
@@ -44,6 +46,7 @@ species_by_nursery$website <- iconv(species_by_nursery$website, to = "ASCII", su
 
 # Load plant data
 plant_data_full <- read.csv(here("data", "ca_plants_clean_chrctr.csv"), stringsAsFactors = FALSE)
+
 # Define UI
 ui <- fluidPage(
   titlePanel("Fire Wise Gardens & Resilience Prediction"),

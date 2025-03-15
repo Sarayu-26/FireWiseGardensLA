@@ -118,7 +118,9 @@ ca_plant_search <- read.csv(here("data", "ca_plant_search.csv"))
 #load in plant data
 plant_data_full <- read.csv(here("data", "ca_plants_clean_chrctr.csv"))
 
+summary(plant_data_full)
 
+#give me the number of yes and nos from the fire_resistance variable in 
 ######## Graveyard
 #edit make ready for the app
 
