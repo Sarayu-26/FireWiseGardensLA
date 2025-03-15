@@ -4,9 +4,23 @@ library(leaflet)
 library(dplyr)
 library(here)
 library(stringr)
+library(htmltools)
 
 # Load species_by_nursery dataset
 species_by_nursery <- read.csv(here("data", "species_by_nursery.csv"))
+
+nursery_websites <- c(
+  "Theodore Payne Nursery, Los Angeles" = "https://theodorepayne.org/plants-and-seeds/nursery/",
+  "Artemisia Nursery, Los Angeles" = "https://artemisianursery.com/",
+  "Matilija Nursery, Moorpark" = "https://www.matilijanursery.com/",
+  "El Nativo Growers, Azusa" = "https://elnativogrowers.com/",
+  "Plant Material, Los Angeles" = "https://plant-material.com/",
+  "Lincoln Avenue Nursery, Pasadena" = "https://lincolnavenuenursery.com/")
+# Ensure website column is properly classified as character
+species_by_nursery$website <- as.character(species_by_nursery$website)  # Make sure it's a character vector
+species_by_nursery$website <- stringr::str_trim(species_by_nursery$website)  # Remove any leading/trailing spaces
+species_by_nursery$website <- iconv(species_by_nursery$website, to = "ASCII", sub = "")
+  
 
 # Define UI
 ui <- fluidPage(
@@ -56,6 +70,7 @@ server <- function(input, output, session) {
                group_by(name) %>%
                summarize(lat = mean(lat), long = mean(long), .groups = "drop"))  # Unique nursery
     }
+    
   })
   
   # Reactive: Filter species by selected plant species (Using `common_name`)
@@ -73,12 +88,20 @@ server <- function(input, output, session) {
   # Update markers for selected nursery
   observe({
     selected_nursery <- filtered_nursery()
+    print(selected_nursery)  # Check the data being passed
+    
+    # Use the manual mapping to get the website for each selected nursery
+    selected_nursery$website <- nursery_websites[selected_nursery$name]
+    
+    # Check if the website is correctly assigned
+    print(selected_nursery$website)
     
     leafletProxy("nursery_map") %>%
       clearMarkers() %>%
       clearShapes() %>%
       addMarkers(data = selected_nursery, 
-                 lng = ~long, lat = ~lat, popup = ~name)
+                 lng = ~long, lat = ~lat, 
+                 popup = ~paste(name, "<br><a href='", website, "' target='_blank'>Visit Website</a>"))
   })
   
   # Render map for selected plant species
