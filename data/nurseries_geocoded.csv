@@ -1,9 +1,9 @@
-"name","lat","long"
-"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
-"Hahamongna Native Plant Nursery, Los Angeles",34.1960652,-118.175301019236
-"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
-"Matilija Nursery, Moorpark",34.3184,-118.8811
-"Plant Material, Los Angeles",34.11452,-118.2362
-"Lincoln Avenue Nursery, Pasadena",34.1691,-118.1356
-"El Nativo Growers, Azusa",34.1309,-117.9115
-"Bellefontaine Nursery, Pasadena",34.1313888,-118.1501089
+"nursery_id","name","lat","long"
+1,"Theodore Payne Nursery, Los Angeles",34.2385248,-118.359354052473
+2,"Hahamongna Native Plant Nursery, Los Angeles",34.1960652,-118.175301019236
+3,"Artemisia Nursery, Los Angeles",34.0706007,-118.173616
+4,"Matilija Nursery, Moorpark",34.3184,-118.8811
+5,"Plant Material, Los Angeles",34.11452,-118.2362
+6,"Lincoln Avenue Nursery, Pasadena",34.1691,-118.1356
+7,"El Nativo Growers, Azusa",34.1309,-117.9115
+8,"Bellefontaine Nursery, Pasadena",34.1313888,-118.1501089
