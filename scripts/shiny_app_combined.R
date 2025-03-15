@@ -31,18 +31,20 @@ library(htmltools)
 # Load species_by_nursery dataset
 species_by_nursery <- read.csv(here("data", "species_by_nursery.csv"))
 
+# Define nursery websites
 nursery_websites <- c(
   "Theodore Payne Nursery, Los Angeles" = "https://theodorepayne.org/plants-and-seeds/nursery/",
   "Artemisia Nursery, Los Angeles" = "https://artemisianursery.com/",
   "Matilija Nursery, Moorpark" = "https://www.matilijanursery.com/",
   "El Nativo Growers, Azusa" = "https://elnativogrowers.com/",
   "Plant Material, Los Angeles" = "https://plant-material.com/",
-  "Lincoln Avenue Nursery, Pasadena" = "https://lincolnavenuenursery.com/")
-# Ensure website column is properly classified as character
-species_by_nursery$website <- as.character(species_by_nursery$website)  # Make sure it's a character vector
-species_by_nursery$website <- stringr::str_trim(species_by_nursery$website)  # Remove any leading/trailing spaces
-species_by_nursery$website <- iconv(species_by_nursery$website, to = "ASCII", sub = "")
+  "Lincoln Avenue Nursery, Pasadena" = "https://lincolnavenuenursery.com/"
+)
 
+# Clean the website column
+species_by_nursery$website <- as.character(species_by_nursery$website)
+species_by_nursery$website <- stringr::str_trim(species_by_nursery$website)
+species_by_nursery$website <- iconv(species_by_nursery$website, to = "ASCII", sub = "")
 
 # Load plant data
 plant_data_full <- read.csv(here("data", "ca_plants_clean_chrctr.csv"), stringsAsFactors = FALSE)
@@ -51,23 +53,10 @@ plant_data_full <- read.csv(here("data", "ca_plants_clean_chrctr.csv"), stringsA
 ui <- fluidPage(
   titlePanel("Fire Wise Gardens & Resilience Prediction"),
   
-  tabsetPanel(
-    # Tab 1: Filter by Nursery
-    tabPanel("Select by Nursery",
-             selectInput("nursery_select", "Choose a Nursery:", choices = NULL),
-             leafletOutput("nursery_map")),
-    
-    # Tab 2: Filter by Plant Species (Using common_name)
-    tabPanel("Select by Plant Species",
-             selectInput("species_select", "Choose a Plant Species:", choices = NULL),
-             leafletOutput("species_map"))
-  ),
-  
   sidebarLayout(
     sidebarPanel(
       conditionalPanel(
         condition = "input.tabs == 'Plant Selection' || input.tabs == 'Select by Nursery' || input.tabs == 'Select by Plant Species'",
-        
         selectInput("fire_resistance", "Fire Resistance:", choices = c("Not Selected", "Yes", "No")),
         selectInput("growth_rate", "Growth Rate:", choices = c("Not Selected", "Slow", "Moderate", "Rapid")),
         sliderInput("height", "Height (cm):", 
@@ -100,63 +89,71 @@ ui <- fluidPage(
     ),
     
     mainPanel(
-      tabsetPanel(id = "tabs",
-                  # New Introduction Tab
-                  tabPanel("Introduction",
-                           h2("Welcome to Fire Wise Gardens!"),
-                           p("This app helps you select fire-resilient plants for your garden in Los Angeles. Using data from the USDA Natural Resources Conservation Service Plant Database, we provide insights into plant characteristics and their fire resilience."),
-                           br(),
-                           h3("About the Data"),
-                           p("The data used in this app is sourced from the USDA Natural Resources Conservation Service Plant Database. We filtered the data to include only plants native to or suitable for Los Angeles. The dataset includes the following variables:"),
-                           tags$ul(
-                             tags$li(strong("Fire Resistance:"), "Whether the plant is fire-resistant (Yes/No)."),
-                             tags$li(strong("Growth Rate:"), "The growth rate of the plant (Slow, Moderate, Rapid)."),
-                             tags$li(strong("Height:"), "The height of the plant in centimeters (ranging from 0 to 229 cm)."),
-                             tags$li(strong("Drought Tolerance:"), "The plant's tolerance to drought (Low, Medium, High)."),
-                             tags$li(strong("Fire Tolerance:"), "The plant's tolerance to fire (Low, Medium, High)."),
-                             tags$li(strong("Moisture Use:"), "The plant's moisture requirements (Low, Medium, High)."),
-                             tags$li(strong("Planting Density:"), "The recommended planting density (ranging from 70 to 43,560 plants per unit area)."),
-                             tags$li(strong("Root Depth:"), "The depth of the plant's roots in centimeters (ranging from 0 to 60 cm)."),
-                             tags$li(strong("Bloom Period:"), "The period during which the plant blooms (e.g., Spring, Summer)."),
-                             tags$li(strong("Growth Habit:"), "The growth habit of the plant (e.g., Tree, Shrub, Forb/herb)."),
-                             tags$li(strong("Growth Period:"), "The period during which the plant grows (e.g., Spring, Summer).")
-                           ),
-                           br(),
-                           h3("Binary Logistic Regression"),
-                           p("To determine whether a plant is fire-resilient, we use binary logistic regression, a supervised learning algorithm. This model predicts the probability of a binary outcome (e.g., fire-resilient or not) based on input features such as growth rate, height, and drought tolerance."),
-                           p("The logistic regression model works by:"),
-                           tags$ul(
-                             tags$li("Fitting a logistic function to the data."),
-                             tags$li("Estimating the probability of a plant being fire-resilient based on its characteristics."),
-                             tags$li("Classifying the plant as fire-resilient if the probability exceeds a threshold (e.g., 0.5).")
-                           ),
-                           br(),
-                           
-                           p("Explore the app to find the best plants for your garden and learn more about their fire resilience!")
-                  ),
-                  
-                  tabPanel("Plant Selection",
-                           tableOutput("filtered_table")),
-                  
-                  tabPanel("Exploratory Data Analysis",
-                           plotOutput("histogram"),
-                           plotOutput("boxplot")),
-                  
-                  tabPanel("Model Training & Comparison",
-                           verbatimTextOutput("model_summary"),
-                           DTOutput("model_table"),
-                           verbatimTextOutput("best_model")),
-                  
-                  tabPanel("Nursery Map",
-                           leafletOutput("nursery_map"))
+      tabsetPanel(
+        id = "tabs",
+        
+        tabPanel("Introduction",
+                 h2("Welcome to Fire Wise Gardens!"),
+                 p("This app helps you select fire-resilient plants for your garden in Los Angeles. Using data from the USDA Natural Resources Conservation Service Plant Database, we provide insights into plant characteristics and their fire resilience."),
+                 br(),
+                 h3("About the Data"),
+                 p("The data used in this app is sourced from the USDA Natural Resources Conservation Service Plant Database. We filtered the data to include only plants native to or suitable for Los Angeles. The dataset includes the following variables:"),
+                 tags$ul(
+                   tags$li(strong("Fire Resistance:"), "Whether the plant is fire-resistant (Yes/No)."),
+                   tags$li(strong("Growth Rate:"), "The growth rate of the plant (Slow, Moderate, Rapid)."),
+                   tags$li(strong("Height:"), "The height of the plant in centimeters (ranging from 0 to 229 cm)."),
+                   tags$li(strong("Drought Tolerance:"), "The plant's tolerance to drought (Low, Medium, High)."),
+                   tags$li(strong("Fire Tolerance:"), "The plant's tolerance to fire (Low, Medium, High)."),
+                   tags$li(strong("Moisture Use:"), "The plant's moisture requirements (Low, Medium, High)."),
+                   tags$li(strong("Planting Density:"), "The recommended planting density (ranging from 70 to 43,560 plants per unit area)."),
+                   tags$li(strong("Root Depth:"), "The depth of the plant's roots in centimeters (ranging from 0 to 60 cm)."),
+                   tags$li(strong("Bloom Period:"), "The period during which the plant blooms (e.g., Spring, Summer)."),
+                   tags$li(strong("Growth Habit:"), "The growth habit of the plant (e.g., Tree, Shrub, Forb/herb)."),
+                   tags$li(strong("Growth Period:"), "The period during which the plant grows (e.g., Spring, Summer).")
+                 ),
+                 br(),
+                 h3("Binary Logistic Regression"),
+                 p("To determine whether a plant is fire-resilient, we use binary logistic regression, a supervised learning algorithm. This model predicts the probability of a binary outcome (e.g., fire-resilient or not) based on input features such as growth rate, height, and drought tolerance."),
+                 p("The logistic regression model works by:"),
+                 tags$ul(
+                   tags$li("Fitting a logistic function to the data."),
+                   tags$li("Estimating the probability of a plant being fire-resilient based on its characteristics."),
+                   tags$li("Classifying the plant as fire-resilient if the probability exceeds a threshold (e.g., 0.5).")
+                 ),
+                 br(),
+                 p("Explore the app to find the best plants for your garden and learn more about their fire resilience!")
+        ),
+        
+        tabPanel("Plant Selection",
+                 tableOutput("filtered_table")),
+        
+        tabPanel("Exploratory Data Analysis",
+                 plotOutput("histogram"),
+                 plotOutput("boxplot")),
+        
+        tabPanel("Model Training & Comparison",
+                 verbatimTextOutput("model_summary"),
+                 DTOutput("model_table"),
+                 verbatimTextOutput("best_model")),
+        
+        tabPanel("Map Tabs", 
+                 tabsetPanel(
+                   tabPanel("Select by Nursery",
+                            selectInput("nursery_select", "Choose a Nursery:", choices = NULL),
+                            leafletOutput("nursery_map")),
+                   
+                   tabPanel("Select by Plant Species",
+                            selectInput("species_select", "Choose a Plant Species:", choices = NULL),
+                            leafletOutput("species_map"))
+                 )
+        )
       )
     )
   )
 )
+
 # Define Server
 server <- function(input, output, session) {
-  
-  
   # Populate dropdown for nursery selection
   observe({
     updateSelectInput(session, "nursery_select", 
@@ -176,14 +173,13 @@ server <- function(input, output, session) {
     if (input$nursery_select == "All Nurseries") {
       return(species_by_nursery %>%
                group_by(name) %>%
-               summarize(lat = mean(lat), long = mean(long), .groups = "drop"))  # Ensures unique nurseries
+               summarize(lat = mean(lat), long = mean(long), .groups = "drop"))
     } else {
       return(species_by_nursery %>%
                filter(name == input$nursery_select) %>%
                group_by(name) %>%
-               summarize(lat = mean(lat), long = mean(long), .groups = "drop"))  # Unique nursery
+               summarize(lat = mean(lat), long = mean(long), .groups = "drop"))
     }
-    
   })
   
   # Reactive: Filter species by selected plant species (Using `common_name`)
@@ -195,18 +191,15 @@ server <- function(input, output, session) {
   output$nursery_map <- renderLeaflet({
     leaflet(species_by_nursery) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
-      setView(lng = -118.2437, lat = 34.0522, zoom = 10)  # Center on LA
+      setView(lng = -118.2437, lat = 34.0522, zoom = 10)
   })
   
   # Update markers for selected nursery
   observe({
     selected_nursery <- filtered_nursery()
-    print(selected_nursery)  # Check the data being passed
+    print(selected_nursery) 
     
-    # Use the manual mapping to get the website for each selected nursery
     selected_nursery$website <- nursery_websites[selected_nursery$name]
-    
-    # Check if the website is correctly assigned
     print(selected_nursery$website)
     
     leafletProxy("nursery_map") %>%
@@ -221,7 +214,7 @@ server <- function(input, output, session) {
   output$species_map <- renderLeaflet({
     leaflet(species_by_nursery) %>%
       addProviderTiles(providers$CartoDB.Positron) %>%
-      setView(lng = -118.2437, lat = 34.0522, zoom = 10)  # Center on LA
+      setView(lng = -118.2437, lat = 34.0522, zoom = 10)
   })
   
   # Update markers for selected plant species
