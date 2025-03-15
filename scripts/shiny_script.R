@@ -35,10 +35,15 @@ library(shinyWidgets)
 library(janitor)
 
 #load in data
-#plant_data_raw <- read.csv(here("data", "full_california_native_plants_aligned.csv"))
+plant_data_raw <- read.csv(here("data", "full_california_native_plants_aligned.csv"))
 
+<<<<<<< HEAD
+plant_data_clean <- plant_data_raw
+  
+=======
 plant_data_clean <- "full_california_native_plants_aligned.csv" |>
   clean_names()
+>>>>>>> 76672e9c6aa22e224b4e9f474eb0cd76a91f61c3
 
 plant_data_clean
 
@@ -52,7 +57,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       # Widget 1: Plant Height Category
-      selectInput("h_w", "Select Plant Height Category:",
+      selectInput("H.W", "Select Plant Height Category:",
                   choices = c("Tree", "Shrub", "Bush")),
       
       # Widget 2: Pollinator Interaction
@@ -81,8 +86,8 @@ server <- function(input, output) {
     data <- plant_data_clean
     
     # Filter by height category
-    if (input$h_w != "") {
-      data <- subset(data, h_w == input$h_w)
+    if (input$H.W != "") {
+      data <- subset(data, H.W == input$H.W)
     }
     
     # Filter by pollinator interactions

@@ -13,19 +13,18 @@ library(tidyr)
 library(yardstick)
 library(broom)
 library(workflowsets)
-library(tidymodels)
 
 
 # Pseudocode 
 # 1. import data 
-  # a. create new csv called "ca_plant_search_fixed.csv"
-  # b. Couldn't use "ca_plant_search.csv" because two top rows -- read_csv couldn't read i
+# a. create new csv called "ca_plant_search_fixed.csv"
+# b. Couldn't use "ca_plant_search.csv" because two top rows -- read_csv couldn't read i
 # 2. clean data 
-  # a. clean names 
-  # b. select columns
-  # c. remove characteristics_data = no
+# a. clean names 
+# b. select columns
+# c. remove characteristics_data = no
 # 2.1 address columns that have multiple inputs per cell
-  # a. columns = growth_habit, growth_period
+# a. columns = growth_habit, growth_period
 # 3. join data: ca_plants and characteristics_clean (this gives us CA data)
 ####### this is where I left off - Nico 
 
@@ -34,10 +33,10 @@ library(tidymodels)
 # 4. make factors factors
 # 5. Split data
 # 6. Build the model
-  # a. Write recipes (we're going to ultimately want to test multiple recipes)
-  # b. Create workflow
-  # c. Fit data and get predictions 
-  # d. evaluate performance with accuracy and roc_auc from yardstick package 
+# a. Write recipes (we're going to ultimately want to test multiple recipes)
+# b. Create workflow
+# c. Fit data and get predictions 
+# d. evaluate performance with accuracy and roc_auc from yardstick package 
 # 7. Cross-Fold validation
 # 8. Finalize model
 
@@ -117,7 +116,7 @@ write.csv(ca_full_data, here::here("data", "ca_plants_clean_chrctr.csv"))
 
 
 # Convert to factors
-plant_df <- characteristics_clean |>
+plant_df <- ca_full_data |>
   mutate(fire_resistance = factor(fire_resistance)) |>
   mutate(growth_rate = factor(growth_rate)) |>
   mutate(drought_tolerance = factor(drought_tolerance)) |>
@@ -127,11 +126,6 @@ plant_df <- characteristics_clean |>
   mutate(growth_habit = factor(growth_habit)) |>
   mutate(growth_period = factor(growth_period))
 
-plant_df |>
-  group_by(fire_resistance) |>
-  summarize(n = n()) |>
-  ungroup() |>
-  mutate(prop = n / sum(n))
 
 # Split data
 set.seed(123)
@@ -144,52 +138,30 @@ plant_test_df <- testing(plant_split)
 
 # BUILD MODEL 
 
-# set recipe
-rec1 <- recipe(fire_resistance ~ moisture_use + growth_period + height + 
-                planting_density + root_depth, data = plant_train_df) |>
-  step_normalize(height, planting_density, root_depth)
+library(tidymodels)
 
-rec2 <- recipe(fire_resistance ~ moisture_use + growth_period + height + planting_density + root_depth, 
+# Assuming plant_train_df is your training data
+# Create Recipe B: recode growth_period and then use it along with height and root_depth
+library(tidymodels)
+library(dplyr)
+
+# Assume plant_train_df is already created from your data split
+
+# Define Recipe 2 without planting_density
+rec2 <- recipe(fire_resistance ~ moisture_use + growth_period + height + root_depth, 
                data = plant_train_df) %>%
-  step_normalize(height, planting_density, root_depth)
-
-rec3 <- recipe(fire_resistance ~ moisture_use + growth_period + height, data = plant_train_df) %>%
-  step_normalize(height)
-
-recA <- recipe(fire_resistance ~ moisture_use + height + root_depth, 
-               data = plant_train_df) |>
   step_normalize(height, root_depth)
 
-
-
-# ENGINE AND WORKFLOW
-# set engine
+# Define the logistic regression model specification
 log_md <- logistic_reg() %>%
   set_engine("glm")
 
-# create CV folds
-set.seed(12)
-folds <- vfold_cv(plant_train_df, v = 10, strata = fire_resistance)
+# Create and fit the workflow using the modified Recipe 2
+log_fit2 <- workflow() %>%
+  add_recipe(rec2) %>%
+  add_model(log_md) %>%
+  fit(plant_train_df)
 
-# set workflow
-wf_set <- workflow_set(
-  preproc = list(
-    rec1 = rec1,
-    rec2 = rec2,
-    rec3 = rec3,
-    recA = recA,
-    recB = recB
-    ),
-  models = list(logistic = log_md)
-)
-
-# fit and evaluate each workflow w/ CV
-wf_set <- wf_set |>
-  workflow_map("fit_resamples", resamples = folds)
-
-# collect metrics 
-results_wfset <- wf_set %>% collect_metrics()
-print(results_wfset)
-
-
-
+# (Optional) View model coefficients
+library(broom)
+tidy(log_fit2)
