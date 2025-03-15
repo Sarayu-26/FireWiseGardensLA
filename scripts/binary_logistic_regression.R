@@ -90,6 +90,7 @@ chrctr_period <- chrctr_habit |>
 characteristics_clean <- chrctr_period |>
   select(-characteristics_data)
 
+write.csv(characteristics_clean, here::here("data", "all_plants.csv"))
 
 # JOIN DATA 
 ca_full_data <- full_join(ca_plants, characteristics_clean, by = "accepted_symbol") |>
@@ -149,15 +150,19 @@ rec1 <- recipe(fire_resistance ~ moisture_use + growth_period + height +
                 planting_density + root_depth, data = plant_train_df) |>
   step_normalize(height, planting_density, root_depth)
 
-rec2 <- recipe(fire_resistance ~ moisture_use + growth_period + height + planting_density + root_depth, 
+rec2 <- recipe(fire_resistance ~ moisture_use + growth_period + height + root_depth, 
                data = plant_train_df) %>%
-  step_normalize(height, planting_density, root_depth)
+  step_normalize(height, root_depth)
 
 rec3 <- recipe(fire_resistance ~ moisture_use + growth_period + height, data = plant_train_df) %>%
   step_normalize(height)
 
 recA <- recipe(fire_resistance ~ moisture_use + height + root_depth, 
                data = plant_train_df) |>
+  step_normalize(height, root_depth)
+
+recB <- recipe(fire_resistance ~ moisture_use + growth_period + height + root_depth + growth_habit, 
+               data = plant_train_df) %>%
   step_normalize(height, root_depth)
 
 
