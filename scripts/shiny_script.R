@@ -37,7 +37,7 @@ library(janitor)
 #load in data
 #plant_data_raw <- read.csv(here("data", "full_california_native_plants_aligned.csv"))
 
-plant_data_clean <- full_california_native_plants_aligned |>
+plant_data_clean <- "full_california_native_plants_aligned.csv" |>
   clean_names()
 
 plant_data_clean

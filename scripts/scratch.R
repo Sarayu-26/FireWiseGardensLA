@@ -115,3 +115,117 @@ ca_plant_search <- read.csv(here("data", "ca_plant_search.csv"))
 # 
 
 
+#load in plant data
+plant_data_full <- read.csv(here("data", "ca_plants_clean_chrctr.csv"))
+
+
+######## Graveyard
+#edit make ready for the app
+
+# # Simulated dataset for fire resilience prediction
+# generate_data <- function(n = 200) {
+#   data.frame(
+#     characteristic1 = runif(n, 0, 10),
+#     characteristic2 = runif(n, 0, 10),
+#     characteristic3 = runif(n, 0, 10),
+#     characteristic4 = runif(n, 0, 10),
+#     characteristic5 = runif(n, 0, 10),
+#     fire_resistanceilient = sample(c(0, 1), n, replace = TRUE)
+#   )
+# }
+# 
+# data <- generate_data()
+
+# Placeholder dataset for fire-wise plant filtering
+# plant_data <- data.frame(
+#   Plant = paste("Plant", 1:50),
+#   h_w = sample(c("Tree", "Shrub", "Bush"), 50, replace = TRUE),
+#   Pollinators = sample(c("Birds", "Bees", "Butterflies"), 50, replace = TRUE),
+#   FireResilience = sample(c("Low", "Medium", "High"), 50, replace = TRUE),
+#   NurseryAvailable = sample(c(TRUE, FALSE), 50, replace = TRUE)
+# )
+
+plant_data_full <- read.csv(here("data", "ca_plants_clean_chrctr.csv"), stringsAsFactors = FALSE)
+
+print(head(plant_data_full))
+
+str(plant_data_full)
+
+summary(plant_data_full)
+
+#change to numeric
+plant_data_full$height <- as.numeric(plant_data_full$height)
+plant_data_full$planting_density <- as.numeric(plant_data_full$planting_density)
+plant_data_full$root_depth <- as.numeric(plant_data_full$root_depth)
+
+print(str(plant_data_full))
+print(head(plant_data_full))
+
+
+# Reactive selection for EDA and modeling
+selected_data <- reactive({
+  req(input$predictors)
+  filtered_data()[, c(input$predictors, "FireResistance")]  # Update column name if necessary
+})
+
+# Histogram
+output$histogram <- renderPlot({
+  ggplot(filtered_data(), aes_string(x = input$predictors[1])) +
+    geom_histogram(binwidth = 1, fill = "blue", alpha = 0.7) +
+    labs(title = "Histogram of Selected Characteristic")
+})
+
+# Boxplot
+# output$boxplot <- renderPlot({
+#   ggplot(filtered_data(), aes(x = as.factor(fire_resilience), y = .data[[input$predictors[1]]])) +
+#     geom_boxplot(fill = "red", alpha = 0.7) +
+#     labs(title = "Boxplot of Selected Characteristic by Fire Resilience")
+# })
+
+# Train models when button is clicked
+# model_results <- eventReactive(input$run_model, {
+#   set.seed(123)
+#   train_control <- trainControl(method = "cv", number = 10)
+#   models <- list(
+#     logistic = train(FireResistance ~ ., data = selected_data(), method = "glm", 
+#                      family = "binomial", trControl = train_control),
+#     rf = train(FireResistance ~ ., data = selected_data(), method = "rf", 
+#                trControl = train_control),
+#     svm = train(FireResistance ~ ., data = selected_data(), method = "svmRadial", 
+#                 trControl = train_control)
+#   )
+#   models
+# })
+
+# Model summary
+output$model_summary <- renderPrint({
+  req(model_results())
+  summary(model_results()$logistic$finalModel)
+})
+
+# Model comparison table
+output$model_table <- renderDT({
+  req(model_results())
+  res <- data.frame(
+    Model = names(model_results()),
+    Accuracy = sapply(model_results(), function(m) max(m$results$Accuracy))
+  )
+  datatable(res)
+})
+
+# Display best model
+output$best_model <- renderPrint({
+  req(model_results())
+  best_model <- names(which.max(sapply(model_results(), function(m) max(m$results$Accuracy))))
+  paste("Best Model: ", best_model)
+})
+
+# Render Leaflet nursery map
+output$nursery_map <- renderLeaflet({
+  leaflet(nurseries) %>%
+    addProviderTiles(providers$OpenStreetMap) %>%
+    addMarkers(lng = ~long, lat = ~lat, popup = ~name)
+})
+}
+
+
