@@ -30,7 +30,7 @@ species_by_nursery$website <- as.character(species_by_nursery$website)
 species_by_nursery$website <- stringr::str_trim(species_by_nursery$website)
 species_by_nursery$website <- iconv(species_by_nursery$website, to = "ASCII", sub = "")
 
-plant_data_full <- read.csv(here("data", "ca_plants_clean_chrctr.csv"), stringsAsFactors = FALSE)
+plant_data_full <- read.csv(here("data", "plant_data_full.csv"), stringsAsFactors = FALSE) #saved plant_data_full.csv from clean_chrctr and added new nursery column
 
 # Define nursery websites lookup
 nursery_websites <- c(
@@ -138,7 +138,8 @@ ui <- fluidPage(
   titlePanel("Fire Wise Gardens & Resilience Prediction"),
   
   sidebarLayout(
-    sidebarPanel(
+    sidebarPanel(width = 2,
+              
       # Controls for Plant Selection and Mapping tabs
       conditionalPanel(
         condition = "input.tabs == 'Plant Selection' || input.tabs == 'Select by Nursery' || input.tabs == 'Select by Plant Species'",
@@ -190,6 +191,15 @@ ui <- fluidPage(
       tabsetPanel(id = "tabs",
                   
                   tabPanel("Introduction",
+                           fluidRow(
+                             column(6, 
+                                    div(
+                                      style = "text-align: center;",
+                                      tags$img(src = "ca_garden.jpg", width = "90%", style = "border-radius: 10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);"),
+                                      tags$figcaption("Photo: Summer Chaparral garden by Philip van Soelen", class = "image-credit")
+                                    )
+                             ),
+                           column(10, 
                            h2("Welcome to Fire Wise Gardens!"),
                            p("This app helps you select fire-resilient plants for your garden in Los Angeles, CA. Using data from the USDA Natural Resources Conservation Service Plant Database, we provide insights into plant characteristics and their fire resilience."),
                            h3("About the Data"),
@@ -209,8 +219,10 @@ ui <- fluidPage(
                            ),
                            br(),
                            h3("Data Cited and Acknowledgements"),
-                           p("Thank you to Gerry at USDA for providing the data.  The data was sourced from the USDA Natural Resources Conservation Service Plant Database. Resources Conservation Service. PLANTS Database. United States Department of Agriculture. Accessed February 18 2025, from https://plants.usda.gov/csvdownload?plantLst=NRCSStateList&nrcsstate=California.")
-                  ),  
+                           p("Thank you to Gerry at USDA for providing the data. PLANTS Database. United States Department of Agriculture. Accessed February 18 2025, from https://plants.usda.gov/csvdownload?plantLst=NRCSStateList&nrcsstate=California.")
+                           )  
+                           )
+                  ),   
                   
                   tabPanel("Plant Selection", tableOutput("filtered_table")),
                   
@@ -220,7 +232,16 @@ ui <- fluidPage(
                            #tableOutput("logistic_table")
                   ),
                   
-                  tabPanel("Explore Local Nurseries", 
+                  tabPanel("Explore Local Nurseries",
+                           fluidRow(
+                             column(10,
+                                    div(
+                                      style = "text-align: center;",
+                                      tags$img(src = "flower_mosaic.jpg", width = "85%", style = "border-radius: 10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);"),
+                                      tags$figcaption("Photo: CDFW Flower Mosaic Banner", class = "image-credit")
+                                    )
+                             ),
+                             column(12, 
                            tabsetPanel(
                              tabPanel("Select by Nursery",
                                       selectInput("nursery_select", "Choose a Nursery:", choices = NULL),
@@ -230,7 +251,9 @@ ui <- fluidPage(
                                       selectInput("species_select", "Choose a Plant Species:", choices = NULL),
                                       leafletOutput("species_map")
                              )
+                           )
                            ) 
+                           )
                   ),  
                   
                   tabPanel("Fire Resistance Calculator",
@@ -368,7 +391,7 @@ server <- function(input, output, session) {
       data <- subset(data, growth_period == input$growth_period_full)
     }
     if (input$nursery_availability) {
-      data <- subset(data, nursery_available == TRUE)
+      data <- subset(data, nursery_availability == 1)
     }
     data
   })
