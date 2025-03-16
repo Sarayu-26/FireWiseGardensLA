@@ -101,7 +101,6 @@ log_fit2 <- workflow() %>%
 ui <- fluidPage(
   theme = shinytheme("flatly"),
   tags$head(
-    # Include a Google Font for a modern, artsy feel
     tags$link(rel = "stylesheet", href = "https://fonts.googleapis.com/css?family=Montserrat"),
     tags$style(HTML("
       body {
@@ -135,7 +134,9 @@ ui <- fluidPage(
       }
     "))
   ),
+  
   titlePanel("Fire Wise Gardens & Resilience Prediction"),
+  
   sidebarLayout(
     sidebarPanel(
       # Controls for Plant Selection and Mapping tabs
@@ -168,10 +169,8 @@ ui <- fluidPage(
       conditionalPanel(
         condition = "input.tabs == 'Fire Resistance Calculator'",
         h3("Adjust Predictor Variables"),
-        selectInput("moisture_use_calc", "Moisture Use:",
-                    choices = levels(plant_df$moisture_use)),
-        selectInput("growth_period_calc", "Growth Period:",
-                    choices = levels(plant_df$growth_period)),
+        selectInput("moisture_use_calc", "Moisture Use:", choices = levels(plant_df$moisture_use)),
+        selectInput("growth_period_calc", "Growth Period:", choices = levels(plant_df$growth_period)),
         numericInput("height_calc", "Plant Height (inches):", 
                      value = mean_height_in_model,
                      min = min_height_in_model, 
@@ -182,64 +181,67 @@ ui <- fluidPage(
                      min = round(min(plant_df$root_depth, na.rm = TRUE) / 2.54, 1), 
                      max = round(max(plant_df$root_depth, na.rm = TRUE) / 2.54, 1), 
                      step = 0.5),
-        selectInput("growth_habit_calc", "Growth Habit:",
-                    choices = levels(plant_df$growth_habit)),
+        selectInput("growth_habit_calc", "Growth Habit:", choices = levels(plant_df$growth_habit)),
         actionButton("predict_btn", "Predict Fire Resistance", class = "btn-primary")
       )
     ),
     
     mainPanel(
-      tabsetPanel(
-        id = "tabs",
-        
-        tabPanel("Introduction",
-                 h2("Welcome to Fire Wise Gardens!"),
-                 p("This app helps you select fire-resilient plants for your garden in Los Angeles. Using data from the USDA Natural Resources Conservation Service Plant Database, we provide insights into plant characteristics and their fire resilience."),
-                 br(),
-                 h3("About the Data"),
-                 p("The data used in this app is sourced from the USDA Natural Resources Conservation Service Plant Database. We filtered the data to include only plants native to or suitable for Los Angeles. The dataset includes the following variables:"),
-                 tags$ul(
-                   tags$li(strong("Fire Resistance:"), "Whether the plant is fire-resistant (Yes/No)."),
-                   tags$li(strong("Growth Rate:"), "The growth rate of the plant (Slow, Moderate, Rapid)."),
-                   tags$li(strong("Height:"), "The height of the plant (in inches)."),
-                   tags$li(strong("Drought Tolerance:"), "The plant's tolerance to drought (Low, Medium, High)."),
-                   tags$li(strong("Fire Tolerance:"), "The plant's tolerance to fire (Low, Medium, High)."),
-                   tags$li(strong("Moisture Use:"), "The plant's moisture requirements (Low, Medium, High)."),
-                   tags$li(strong("Planting Density:"), "The recommended planting density."),
-                   tags$li(strong("Root Depth:"), "The depth of the plant's roots (in cm)."),
-                   tags$li(strong("Bloom Period:"), "The period during which the plant blooms."),
-                   tags$li(strong("Growth Habit:"), "The growth habit of the plant (e.g., Tree, Shrub, Forb/herb)."),
-                   tags$li(strong("Growth Period:"), "The period during which the plant grows.")
-                 ),
-                 br(),
-                 h3("Binary Logistic Regression"),
-                 p("We use binary logistic regression to predict if a plant is fire resistant. The model uses predictors such as moisture use, growth period, plant height, root depth, and growth habit to estimate the probability of fire resistance.")
-        ),
-        
-        tabPanel("Plant Selection",
-                 tableOutput("filtered_table")),
-        
-        tabPanel("Map Tabs", 
-                 tabsetPanel(
-                   tabPanel("Select by Nursery",
-                            selectInput("nursery_select", "Choose a Nursery:", choices = NULL),
-                            leafletOutput("nursery_map")),
-                   
-                   tabPanel("Select by Plant Species",
-                            selectInput("species_select", "Choose a Plant Species:", choices = NULL),
-                            leafletOutput("species_map"))
-                 )
-        ),
-        
-        tabPanel("Fire Resistance Calculator",
-                 h3("Fire Resistance Prediction"),
-                 p("Adjust the inputs below to predict the probability that a plant is fire resistant. The model calculates probabilities for both outcomes (Yes/No) and provides an overall classification based on a 0.5 threshold."),
-                 br(),
-                 tableOutput("prediction_table"))
-      )
-    )
-  )
+      tabsetPanel(id = "tabs",
+                  
+                  tabPanel("Introduction",
+                           h2("Welcome to Fire Wise Gardens!"),
+                           p("This app helps you select fire-resilient plants for your garden in Los Angeles, CA. Using data from the USDA Natural Resources Conservation Service Plant Database, we provide insights into plant characteristics and their fire resilience."),
+                           h3("About the Data"),
+                           p("The data used in this app is sourced from the USDA Natural Resources Conservation Service Plant Database. We filtered the data to include only plants native to or suitable for Los Angeles. The dataset includes the following variables:"),
+                           tags$ul(
+                             tags$li(strong("Fire Resistance:"), "Yes/No."),
+                             tags$li(strong("Growth Rate:"), "Slow, Moderate, Rapid."),
+                             tags$li(strong("Height:"), "Plant height in inches."),
+                             tags$li(strong("Drought Tolerance:"), "Low, Medium, High."),
+                             tags$li(strong("Fire Tolerance:"), "Low, Medium, High."),
+                             tags$li(strong("Moisture Use:"), "Low, Medium, High."),
+                             tags$li(strong("Planting Density:"), "Recommended planting density."),
+                             tags$li(strong("Root Depth:"), "Depth of roots in cm."),
+                             tags$li(strong("Bloom Period:"), "When the plant blooms."),
+                             tags$li(strong("Growth Habit:"), "Tree, Shrub, Forb/herb."),
+                             tags$li(strong("Growth Period:"), "Active growth period.")
+                           ),
+                           br(),
+                           h3("Data Cited and Acknowledgements"),
+                           p("Thank you to Gerry at USDA for providing the data.  The data was sourced from the USDA Natural Resources Conservation Service Plant Database. Resources Conservation Service. PLANTS Database. United States Department of Agriculture. Accessed February 18 2025, from https://plants.usda.gov/csvdownload?plantLst=NRCSStateList&nrcsstate=California.")
+                  ),  
+                  
+                  tabPanel("Plant Selection", tableOutput("filtered_table")),
+                  
+                  tabPanel("Explore the Plant Data", #exploratory Data Analysis 
+                           #p("We use binary logistic regression to predict fire resistance."),
+                           #plotOutput("logistic_plot"),
+                           #tableOutput("logistic_table")
+                  ),
+                  
+                  tabPanel("Explore Local Nurseries", 
+                           tabsetPanel(
+                             tabPanel("Select by Nursery",
+                                      selectInput("nursery_select", "Choose a Nursery:", choices = NULL),
+                                      leafletOutput("nursery_map")
+                             ),
+                             tabPanel("Select by Plant Species",
+                                      selectInput("species_select", "Choose a Plant Species:", choices = NULL),
+                                      leafletOutput("species_map")
+                             )
+                           ) 
+                  ),  
+                  
+                  tabPanel("Fire Resistance Calculator",
+                           h3("Fire Resistance Prediction"),
+                           tableOutput("prediction_table")
+                  )
+      ) 
+    ) 
+  ) 
 )
+
 
 # ====================================
 # Define the Combined Server Logic
