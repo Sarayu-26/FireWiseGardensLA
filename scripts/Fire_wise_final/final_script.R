@@ -182,6 +182,26 @@ ui <- fluidPage(
         padding: 15px;
         border-radius: 5px;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        min-height: 600px; /* Adjust tab content height */
+        width: 100% !important;
+         max-width: 100% !important;
+      display: flex; /* Helps stretch to fit */
+      flex-direction: column;
+      
+      }
+      .tab-pane {
+      width: 100% !important; /* Ensures individual tab panes stretch fully */
+      max-width: 100% !important;
+      flex-grow: 1; /* Allows content to expand */
+      }
+      
+     /* Fixes tables and large text running off */
+    .tab-pane table {
+      width: 100% !important;
+      max-width: 100% !important;
+    }
+      .mainPanel{
+      width: 100% !important /* Adjust main panel width */
       }
     "))
   ),
@@ -189,7 +209,7 @@ ui <- fluidPage(
   titlePanel("Fire Wise Gardens & Resilience Prediction"),
   
   sidebarLayout(
-    sidebarPanel(width = 2,
+    sidebarPanel(width = 3,
               
       # Controls for Plant Selection and Mapping tabs
       conditionalPanel(
@@ -238,7 +258,7 @@ ui <- fluidPage(
       )
     ),
     
-    mainPanel(
+    mainPanel(width = 9,
       tabsetPanel(id = "tabs",
                   
                   tabPanel("Introduction",
