@@ -19,6 +19,8 @@ library(stringr)
 library(htmltools)
 library(readr)
 library(scales)
+library(forcats)
+
 
 # ===============================
 # Data Loading & Preprocessing
@@ -47,6 +49,53 @@ min_height_cm <- ifelse(all(is.na(plant_data_full$height)), 0, min(plant_data_fu
 max_height_cm <- ifelse(all(is.na(plant_data_full$height)), 229, max(plant_data_full$height, na.rm = TRUE))
 min_height_in <- round(min_height_cm / 2.54, 1)
 max_height_in <- round(max_height_cm / 2.54, 1)
+
+# Helper function to clean up variable names
+clean_labels <- function(variable) {
+  recoded <- dplyr::recode(variable,
+                           `fire_toleranceLow` = "Fire Tolerance (Low)",
+                           `fire_toleranceMedium` = "Fire Tolerance (Medium)",
+                           `fire_toleranceHigh` = "Fire Tolerance (High)",
+                           `fire_toleranceNone` = "Fire Tolerance (None)",
+                           `growth_rateSlow` = "Growth Rate (Slow)",
+                           `growth_rateModerate` = "Growth Rate (Moderate)",
+                           `growth_rateRapid` = "Growth Rate (Rapid)",
+                           `drought_toleranceLow` = "Drought Tolerance (Low)",
+                           `drought_toleranceMedium` = "Drought Tolerance (Medium)",
+                           `drought_toleranceHigh` = "Drought Tolerance (High)",
+                           `drought_toleranceNone` = "Drought Tolerance (None)",
+                           `moisture_useLow` = "Moisture Use (Low)",
+                           `moisture_useMedium` = "Moisture Use (Medium)",
+                           `moisture_useHigh` = "Moisture Use (High)",
+                           `bloom_periodEarlySpring` = "Bloom Period (Early Spring)",
+                           `bloom_periodMidSpring` = "Bloom Period (Mid Spring)",
+                           `bloom_periodLate Spring` = "Bloom Period (Late Spring)",
+                           `bloom_periodSummer` = "Bloom Period (Summer)",
+                           `bloom_periodWinter` = "Bloom Period (Winter)",
+                           `bloom_periodSpring` = "Bloom Period (Spring)",
+                           `bloom_periodMid Summer` = "Bloom Period (Mid Summer)",
+                           `bloom_periodMid Spring` = "Bloom Period (Mid Spring)",
+                           `bloom_periodLate Winter` = "Bloom Period (Late Winter)",
+                           `bloom_periodLate Summer` = "Bloom Period (Late Summer)",
+                           `bloom_periodIndeterminate` = "Bloom Period (Indeterminate)",
+                           `bloom_periodFall` = "Bloom Period (Fall)",
+                           `bloom_periodEarly Summer` = "Bloom Period (Early Summer)",
+                           `growth_habitTree` = "Growth Habit (Tree)",
+                           `growth_habitVine` = "Growth Habit (Vine)",
+                           `growth_habitShrub` = "Growth Habit (Shrub)",
+                           `growth_habitForbHerb` = "Growth Habit (Forb/Herb)",
+                           `growth_habitGraminoid` = "Growth Habit (Graminoid)",
+                           `growth_habitSubshrub` = "Growth Habit (Subshrub)",
+                           `growth_periodSpring` = "Growth Period (Spring)",
+                           `growth_periodSummer` = "Growth Period (Summer)",
+                           `growth_periodFall` = "Growth Period (Fall)",
+                           `growth_periodWinter` = "Growth Period (Winter)",
+                           `growth_periodYear Round` = "Growth Period (Year Round)",
+                           
+  )
+  
+  return(recoded)
+}
 
 # -------------------------------
 # Load data for Logistic Regression
@@ -226,10 +275,23 @@ ui <- fluidPage(
                   
                   tabPanel("Plant Selection", tableOutput("filtered_table")),
                   
-                  tabPanel("Explore the Plant Data", #exploratory Data Analysis 
-                           #p("We use binary logistic regression to predict fire resistance."),
-                           #plotOutput("logistic_plot"),
-                           #tableOutput("logistic_table")
+                  tabPanel("Data Exploration",
+                           sidebarLayout(
+                             sidebarPanel(
+                               selectInput("selected_variable", "Select Variable to Explore:",
+                                           choices = c("growth_rate", "drought_tolerance", 
+                                                       "fire_tolerance", "moisture_use", "bloom_period",
+                                                       "growth_habit", "growth_period"),
+                                           selected = "growth_rate")
+                             ),
+                             mainPanel(
+                               plotOutput("bar_plot"),
+                               tableOutput("summary_table"),
+                               h4("Logistic Regression Results"),
+                               verbatimTextOutput("logistic_summary"),
+                               plotOutput("odds_ratio_plot")
+                             )
+                           )
                   ),
                   
                   tabPanel("Explore Local Nurseries",
@@ -399,6 +461,70 @@ server <- function(input, output, session) {
   output$filtered_table <- renderTable({
     filtered_data() %>%
       rename_with(~ str_replace_all(., "_", " ") %>% str_to_title())
+  })
+  
+  # --------------
+  # Data Exploration: Logistic Regression
+  # --------------
+  
+  # Convert selected variable to a factor and filter necessary columns
+  selected_data <- reactive({
+    plant_data_full %>%
+      select(fire_resistance, all_of(input$selected_variable)) %>%
+      mutate(across(everything(), as.factor))
+  })
+  
+  # Bar plot for selected categorical variable ordered by frequency
+  output$bar_plot <- renderPlot({
+    # Reorder the selected variable by frequency
+    selected_data_reordered <- selected_data() %>%
+      mutate(ordered_variable = forcats::fct_infreq(.data[[input$selected_variable]]))
+    
+    ggplot(selected_data_reordered, aes(x = ordered_variable)) +
+      geom_bar(fill = "steelblue", color = "black") +
+      labs(title = paste("Distribution of", clean_labels(input$selected_variable)),
+           x = clean_labels(input$selected_variable), y = "Count") +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  })
+  
+  # Summary table for category counts with cleaned labels
+  output$summary_table <- renderTable({
+    selected_data() %>%
+      mutate(across(all_of(input$selected_variable), clean_labels)) %>%
+      group_by(.data[[input$selected_variable]]) %>%
+      summarise(Count = n(), .groups = "drop")
+  })
+  
+  # Logistic Regression Model
+  logistic_model <- reactive({
+    formula_str <- paste("fire_resistance ~", input$selected_variable)
+    glm(as.formula(formula_str), data = selected_data(), family = binomial)
+  })
+  
+  # Display Model Summary
+  output$logistic_summary <- renderPrint({
+    summary(logistic_model())
+  })
+  
+  # Odds Ratio Plot with cleaned labels
+  output$odds_ratio_plot <- renderPlot({
+    # Get coefficients and exponentiate them for odds ratios
+    model_coefs <- broom::tidy(logistic_model(), exponentiate = TRUE, conf.int = TRUE) %>%
+      arrange(estimate)
+    
+    # Ensure intercept is included with proper label
+    model_coefs$term <- clean_labels(model_coefs$term)
+    
+    # Create the plot, ensuring intercept is included
+    ggplot(model_coefs, aes(x = term, y = estimate, ymin = conf.low, ymax = conf.high)) +
+      geom_pointrange(color = "darkred") +
+      geom_hline(yintercept = 1, linetype = "dashed") +
+      coord_flip() +
+      labs(title = "Odds Ratios for Fire Resistance",
+           x = "Categories", y = "Odds Ratio") +
+      theme_minimal() +
+      theme(axis.text.y = element_text(size = 10))  # Adjust label size for readability
   })
   
   # --------------

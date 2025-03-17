@@ -120,6 +120,8 @@ plant_data_full <- read.csv(here("data", "ca_plants_clean_chrctr.csv"))
 
 summary(plant_data_full)
 
+plant_data_raw <- read.csv(here("data", "ca_plants_clean.csv"))
+
 #give me the number of yes and nos from the fire_resistance variable in 
 ######## Graveyard
 #edit make ready for the app
