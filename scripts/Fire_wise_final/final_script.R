@@ -12,6 +12,7 @@ library(tigris)
 library(dplyr)
 library(tidygeocoder)
 library(tidymodels)
+library(readr)
 library(leaflet)
 library(here)
 library(xtable)
@@ -102,6 +103,7 @@ clean_labels <- function(variable) {
 # -------------------------------
 all_plants <- read_csv(here::here("data", "all_plants.csv"))
 plant_df <- all_plants %>%
+  rename(species_id = `...1`)|>
   mutate(
     fire_resistance = factor(fire_resistance),
     growth_rate = factor(growth_rate),
@@ -111,7 +113,7 @@ plant_df <- all_plants %>%
     bloom_period = factor(bloom_period),
     growth_habit = factor(growth_habit),
     growth_period = factor(growth_period)
-  )
+  ) 
 
 # For the Fire Resistance Calculator, convert height values to inches for UI display
 min_height_cm_model <- min(plant_df$height, na.rm = TRUE)
@@ -334,8 +336,15 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   
   # --------------
-  # Original App Code: Mapping & Plant Selection
+  # Plant Selection Display 
   # --------------
+  plant_df_display <- plant_df %>%
+    rename_with(~ str_to_title(str_replace_all(., "_", " ")), everything())  # Capitalize column names
+  
+  # 4. Output the filtered table with Title Case columns
+  output$filtered_table <- renderTable({
+    plant_df_display  # Use the display version with Title Case column names
+  }, striped = TRUE, hover = TRUE)
   
   # Populate dropdown for nursery selection
   observe({
