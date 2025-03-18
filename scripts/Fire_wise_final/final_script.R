@@ -289,11 +289,19 @@ ui <- fluidPage(
                              tags$li(strong("Growth Period:"), "Active growth period.")
                            ),
                            br(),
+                           h3("About Panel Tabs"),
+                           p("Use the tabs above to navigate through the app"), 
+                           tags$ul(
+                             tags$li(strong("Plant Selection:"), "allows you to filter plants based on various criteria."),
+                             tags$li(strong('Data Exploration:'), "provides insights into plant characteristics and fire resistance."), 
+                             tags$li(strong('Explore Local Nurseries:'), "helps you find nurseries in Los Angeles that carry specific plant species."), 
+                             tags$li(strong('Fire Resistance Calculator:'), "tab predicts the fire resistance of a plant based on user inputs.")
+                           ),
                            h3("Data Cited and Acknowledgements"),
                            p("Thank you to Gerry at USDA for providing the data. PLANTS Database. United States Department of Agriculture. Accessed February 18 2025, from https://plants.usda.gov/csvdownload?plantLst=NRCSStateList&nrcsstate=California.")
-                           )  
                            )
-                  ),   
+                           )  
+                           ),
                   
                   tabPanel("Plant Selection", tableOutput("filtered_table")),
                   
